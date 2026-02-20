@@ -2,7 +2,7 @@
 #
 project( libIGES CXX C )
 
-cmake_minimum_required( VERSION 3.0 FATAL_ERROR )
+cmake_minimum_required( VERSION 3.5 FATAL_ERROR )
 
 set( CMAKE_VERBOSE_MAKEFILE ON )
 
@@ -132,7 +132,7 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
         set( LIBIGES_LIBDIR lib )
         set( LIBIGES_BINDIR bin )
     else(${CONDA_BUILD})
-        set( LIBIGES_LIBDIR bin )
+        set( LIBIGES_LIBDIR lib )
         set( LIBIGES_BINDIR bin )    
     endif(${CONDA_BUILD})
 else()
