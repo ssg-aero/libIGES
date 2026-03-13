@@ -293,3 +293,6 @@ if( USE_SISL )
         DESTINATION ${HDR_GEOM}
     )
 endif()
+
+enable_testing()
+add_test(NAME readtest COMMAND readtest samples/pencil.igs)
