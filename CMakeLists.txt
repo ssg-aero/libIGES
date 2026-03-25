@@ -7,8 +7,8 @@ cmake_minimum_required( VERSION 3.5 FATAL_ERROR )
 set( CMAKE_VERBOSE_MAKEFILE ON )
 
 # Version information
-set( LIBIGES_VERSION_MAJOR 0 )
-set( LIBIGES_VERSION_MINOR 3 )
+set( LIBIGES_VERSION_MAJOR 1 )
+set( LIBIGES_VERSION_MINOR 0 )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMakeModules )
 

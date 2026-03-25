@@ -102,6 +102,16 @@ else()
     set( IGES_LIBS iges )
 endif()
 
+target_include_directories( ${IGES_LIBS}
+    PUBLIC
+        $<BUILD_INTERFACE:${LIBIGES_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${LIBIGES_BINARY_DIR}>
+        $<INSTALL_INTERFACE:include/iges>
+        $<INSTALL_INTERFACE:include/iges/core>
+        $<INSTALL_INTERFACE:include/iges/api>
+        $<INSTALL_INTERFACE:include/iges/geom>
+)
+
 if( USE_SISL AND SISL_NEEDS_BUILD )
 
     # CAVEAT: even when we build SISL we do not install it;
@@ -120,6 +130,7 @@ if( USE_SISL )
 endif()
 
 install( TARGETS ${IGES_LIBS}
+        EXPORT libIGESTargets
         ARCHIVE DESTINATION ${LIBIGES_LIBDIR}
         LIBRARY DESTINATION ${LIBIGES_LIBDIR}
         RUNTIME DESTINATION ${LIBIGES_BINDIR}
@@ -293,6 +304,33 @@ if( USE_SISL )
         DESTINATION ${HDR_GEOM}
     )
 endif()
+
+# --- CMake package config for find_package() support ---
+include( CMakePackageConfigHelpers )
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/libIGESConfigVersion.cmake"
+    VERSION ${LIBIGES_VERSION_MAJOR}.${LIBIGES_VERSION_MINOR}.0
+    COMPATIBILITY SameMajorVersion
+)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/libIGESConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/libIGESConfig.cmake"
+    INSTALL_DESTINATION lib/cmake/libIGES
+)
+
+install( EXPORT libIGESTargets
+    FILE libIGESTargets.cmake
+    NAMESPACE libIGES::
+    DESTINATION lib/cmake/libIGES
+)
+
+install( FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/libIGESConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/libIGESConfigVersion.cmake"
+    DESTINATION lib/cmake/libIGES
+)
 
 enable_testing()
 add_test(NAME readtest COMMAND readtest samples/pencil.igs)
