@@ -38,6 +38,7 @@
 // [more 'file:' + 'orient' + 'pos:' lines for additional parts and subassemblies]
 
 #include <cmath>
+#include <corecrt_math_defines.h>
 #include <cerrno>
 #include <cstdlib>
 #include <iostream>

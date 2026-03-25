@@ -25,7 +25,7 @@
  */
 
 #include <sstream>
-#include <cmath>
+#include <corecrt_math_defines.h>
 #include <error_macros.h>
 #include <core/iges.h>
 #include <core/iges_io.h>
