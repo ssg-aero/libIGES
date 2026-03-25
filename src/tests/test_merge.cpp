@@ -37,8 +37,12 @@
 // [more 'pos:'] lines if multiple instances are desired
 // [more 'file:' + 'orient' + 'pos:' lines for additional parts and subassemblies]
 
-#include <cmath>
-#include <corecrt_math_defines.h>
+// Windows doesn't have M_PI in cmath
+#ifndef M_PI
+    #define M_PI 3.1415926535897932384626433832795
+#endif
+#include <cmath> 
+
 #include <cerrno>
 #include <cstdlib>
 #include <iostream>
